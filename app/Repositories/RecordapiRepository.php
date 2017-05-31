@@ -21,8 +21,12 @@ class RecordapiRepository
      */
     public function recordapi($param)
     {
-        Log::debug('First Debug Info.');
-//        Redis::RPUSH($this->apirecord,json_encode($param));
+        Redis::lpush($this->apirecord,json_encode($param));
+    }
+
+    public function getMsg($key)
+    {
+        return Redis::rpop($key);
     }
 
 }

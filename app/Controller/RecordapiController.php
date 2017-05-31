@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 use App\Repositories\RecordapiRepository;
-use App\Repositories\TestRepository;
 use ERedis as Redis;
 use Rabbitmq;
 

@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Jobs;
-use ERedis as Redis;
+use App\Repositories\RecordapiRepository;
 use Rabbitmq;
 
 class SyncApiRecord
 {
     protected $queue;
     protected $apirecord;
+    protected $record;
 
     /**
      * SyncApiRecord constructor.
@@ -16,6 +17,7 @@ class SyncApiRecord
     {
         $this->queue = 'msgs';
         $this->apirecord = 'record_java_error_api_request_data_list';
+        $this->record = new RecordapiRepository();
     }
 
     /**
@@ -32,17 +34,17 @@ class SyncApiRecord
      */
     public function getMsg()
     {
-        return Redis::lpop($this->apirecord);
+        return $this->record->getMsg($this->apirecord);
     }
 }
 
 
 //实例化
 $syncApiRecord = new SyncApiRecord();
-//$redis = new Redis();
 //获取数据
 //while (true){
     $message = $syncApiRecord->getMsg();
+dd($message);
     //进入队列
 $message ='{"a":1,"b":2}';
     $syncApiRecord->getAPirecord($message);

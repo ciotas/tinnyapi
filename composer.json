@@ -20,7 +20,12 @@
         "Tests\\": "tests/"
     },
     "classmap": [
-      "services"
+      "services",
+      "app/Controller",
+      "app/Jobs",
+      "app/Model",
+      "app/Workers",
+      "app/Repositories"
     ]
   },
   "config": {
